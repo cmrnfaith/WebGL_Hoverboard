@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Unity, { UnityContext } from "react-unity-webgl";
 
 const unityContext = new UnityContext({
-  productName: "HOverboard Test",
+  productName: "Hoverboard Test",
   companyName: "Cameron",
   loaderUrl: "webgl/Build.loader.js",
   dataUrl: "webgl/Build.data",

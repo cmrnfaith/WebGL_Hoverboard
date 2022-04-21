@@ -44,7 +44,7 @@ function createUnityInstance(e, r, t) {
       )
     ) {
       var e =
-        "An error occurred running the Unity content on this page. See your browser JavaScript console for more info. The error was:\n" +
+        "An  error occurred running the Unity content on this page. See your browser JavaScript console for more info. The error was:\n" +
         e;
       e.indexOf("DISABLE_EXCEPTION_CATCHING") != -1
         ? (e =
