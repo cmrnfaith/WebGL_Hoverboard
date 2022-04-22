@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="unity-container">
       {/* The loading screen will be displayed here. */}
-      {isLoaded === false && (
+      {/* {isLoaded === false && (
         <div className="loading-overlay">
           <div className="progress-bar">
             <div
@@ -42,7 +42,7 @@ function App() {
             />
           </div>
         </div>
-      )}
+      )} */}
       {/* The Unity app will be rendered here. */}
       <Unity className="unity-canvas" unityContext={unityContext} />
     </div>
