@@ -6,9 +6,11 @@ const unityContext = new UnityContext({
   productName: "Hoverboard Test",
   companyName: "Cameron",
   loaderUrl: "webgl/Build.loader.js",
-  dataUrl: "webgl/Build.data",
+  dataUrl:
+    "https://github.com/cmrnfaith/WebGL_Hoverboard/blob/master/frontend/public/webgl/Build.data",
   frameworkUrl: "webgl/Build.framework.js",
-  codeUrl: "webgl/Build.wasm",
+  codeUrl:
+    "https://github.com/cmrnfaith/WebGL_Hoverboard/blob/master/frontend/public/webgl/Build.wasm",
 });
 
 function App() {
