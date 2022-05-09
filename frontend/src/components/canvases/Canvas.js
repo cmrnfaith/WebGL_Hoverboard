@@ -13,7 +13,7 @@ import Loading from "../Loading";
 import Interface from "../Interface";
 import Item from "../Item";
 
-const defaultCamera = [0, 10, 18];
+const defaultCamera = [0, 0.6, 3.8];
 const defaultBackground = "dawn";
 
 const ItemCanvas = (props) => {
@@ -51,7 +51,7 @@ const ItemCanvas = (props) => {
       />
       <Canvas id="canvas" shadows>
         <OrbitControls ref={orbitControlsRef} autoRotate={autoRotate}>
-          <mesh position={[0, 4, 0]}></mesh>
+          <mesh position={[0, 0.5, 0]}></mesh>
         </OrbitControls>
         <ambientLight intensity={1} />
         <directionalLight intensity={5} />
@@ -65,21 +65,27 @@ const ItemCanvas = (props) => {
             preset={backgroundTexture}
             background={customBackgroundEnable}
             ground={{
-              height: 7, // Height of the camera that was used to create the env map (Default: 15)
-              radius: 40, // Radius of the world. (Default 60)
-              scale: 1000, // Scale of the backside projected sphere that holds the env texture (Default: 1000)
+              height: 2, // Height of the camera that was used to create the env map (Default: 15)
+              radius: 10, // Radius of the world. (Default 60)
+              scale: 1200, // Scale of the backside projected sphere that holds the env texture (Default: 1000)
             }}
           ></Environment>
           <Float
-            position={[0, 4, 0]}
-            rotation={[0, 0.01, 0]}
-            rotationIntensity={0.45}
-            floatIntensity={6}
+            position={[0, 0, 0]}
+            rotation={[0, 0, 0]}
+            rotationIntensity={0}
+            floatIntensity={0}
             speed={4}
           >
             <Item
-              name={props.match.params.item}
-              collection={props.match.params.collection}
+              name={
+                props.match.params.item ? props.match.params.item : props.item
+              }
+              collection={
+                props.match.params.collection
+                  ? props.match.params.collection
+                  : props.collection
+              }
             />
           </Float>
 
@@ -96,7 +102,7 @@ const ItemCanvas = (props) => {
         <OrbitControls
           minPolarAngle={angleToRadians(20)}
           maxPolarAngle={angleToRadians(70)}
-          target={[0, 4, 0]}
+          target={[0, 0.8, 0]}
           enableZoom={true}
           enablePan={false}
         />

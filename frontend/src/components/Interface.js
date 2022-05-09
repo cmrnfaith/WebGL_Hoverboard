@@ -25,32 +25,32 @@ const defaultBackgrounds = [
 
 const defaultCameras = [
   {
-    value: [0, 10, 18],
+    value: [0, 0.6, 3.8],
     name: "default",
     key: 0,
   },
   {
-    value: [2, 8, 10],
+    value: [0.6, 2, 3.8],
     name: "front",
     key: 1,
   },
   {
-    value: [-2, 8, -10],
+    value: [-0.6, 1.6, -3.8],
     name: "back",
     key: 2,
   },
   {
-    value: [-10, 6, 0],
+    value: [-3.8, 1.2, 0],
     name: "left",
     key: 3,
   },
   {
-    value: [10, 6, 0],
+    value: [3.8, 1.2, 0],
     name: "right",
     key: 4,
   },
   {
-    value: [0, 18, 0],
+    value: [0, 5.8, 0],
     name: "top",
     key: 5,
   },

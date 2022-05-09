@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HoverboardCanvas from "./components/canvases/HoverboardCanvas.js";
 import JetpackCanvas from "./components/canvases/JetpackCanvas.js";
@@ -11,26 +11,27 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+const collection = "JaduJetpack";
+const item = "white";
 const App = () => {
+  function withProps(Component, props) {
+    return function (matchProps) {
+      return <Component {...props} {...matchProps} />;
+    };
+  }
   return (
     <BrowserRouter>
       <Switch className="content">
-        <Route exact path="/">
-          <Redirect to="/jetpack/white" />
-        </Route>
+        <Route path="/" component={withProps(Canvas, { collection, item })} />
 
-        <Route path="/collection/:collection/item/:item" component={Canvas} />
+        <Route path="/collection/:collection/:item" component={Canvas} />
         <Route path="/hoverboard" component={HoverboardCanvas} />
-
         <Route path="/jetpack/:key" component={JetpackCanvas} />
         <Route path="/jetpack" component={JetpackCanvas} />
-
         <Route path="/ava/:key" component={AvaCanvas} />
         <Route path="/ava" component={AvaCanvas} />
-
         <Route path="/hoverboard/:key" component={HoverboardCanvas} />
         <Route path="/hoverboard" component={HoverboardCanvas} />
-
         <Route render={() => <h1>Page not found</h1>} />
       </Switch>
     </BrowserRouter>
