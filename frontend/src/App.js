@@ -16,7 +16,7 @@ const App = () => {
     <BrowserRouter>
       <Switch className="content">
         <Route exact path="/">
-          <Redirect to="/collection/JaduJetpack/item/white" />
+          <Redirect to="/hoverboard/00" />
         </Route>
 
         <Route path="/collection/:collection/item/:item" component={Canvas} />
