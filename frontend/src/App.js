@@ -11,7 +11,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-const collection = "JaduJetpack";
 const item = "white";
 const App = () => {
   function withProps(Component, props) {
