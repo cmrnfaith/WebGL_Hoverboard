@@ -22,11 +22,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch className="content">
-        <Route path="/" component={withProps(Canvas, { collection, item })} />
+        <Route path="/" component={withProps(JetpackCanvas, { item })} />
 
         <Route path="/collection/:collection/:item" component={Canvas} />
         <Route path="/hoverboard" component={HoverboardCanvas} />
-        <Route path="/jetpack/:key" component={JetpackCanvas} />
+        <Route path="/jetpack/:item" component={JetpackCanvas} />
         <Route path="/jetpack" component={JetpackCanvas} />
         <Route path="/ava/:key" component={AvaCanvas} />
         <Route path="/ava" component={AvaCanvas} />

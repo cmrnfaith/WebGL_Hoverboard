@@ -37,9 +37,9 @@ const JetpackCanvas = (props) => {
     orbitControlsRef.current.update();
     // Needs to update perspective Camera .updateProjectionMatrix ()
   }
-
+  console.log(props);
   return (
-    <div className="canvas-jetpack">
+    <div className="canvas">
       <Interface
         backgroundTexture={backgroundTexture}
         setBackGround={setBackGroundTexture}
@@ -82,7 +82,11 @@ const JetpackCanvas = (props) => {
             floatIntensity={6}
             speed={4}
           >
-            <Jetpack name={props.match.params.key} />
+            <Jetpack
+              name={
+                props.match.params.item ? props.match.params.item : props.item
+              }
+            />
             {/* <Item name={props.match.params.key} /> */}
           </Float>
 

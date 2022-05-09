@@ -39,7 +39,7 @@ const HoverboardCanvas = (props) => {
   }
 
   return (
-    <div className="canvas-hoverboard">
+    <div className="canvas">
       <Interface
         backgroundTexture={backgroundTexture}
         setBackGround={setBackGroundTexture}

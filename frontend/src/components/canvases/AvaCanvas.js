@@ -39,7 +39,7 @@ const AvaCanvas = (props) => {
   }
 
   return (
-    <div className="canvas-ava">
+    <div className="canvas">
       <Interface
         backgroundTexture={backgroundTexture}
         setBackGround={setBackGroundTexture}
