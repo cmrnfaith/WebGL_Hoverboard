@@ -31,10 +31,10 @@ const Item = ({ animation, setAnimations, collection, name }) => {
       actions[animation].play();
     }
     // actions
-  }, [animation]);
+  }, [animation, actions, names]);
   useEffect(() => {
     setAnimations(names);
-  }, []);
+  }, [names, setAnimations]);
   console.log(animations);
   return (
     <group ref={group} dispose={null}>
