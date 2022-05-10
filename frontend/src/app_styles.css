@@ -93,6 +93,7 @@ h1 {
     display: block;
   }
   .interface-item {
-    min-width: 8rem;
+    min-width: 7rem;
+    min-height: 3rem;
   }
 } ;
