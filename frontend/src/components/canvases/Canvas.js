@@ -171,6 +171,8 @@ const ItemCanvas = (props) => {
           target={[0, 0.8, 0]}
           enableZoom={true}
           enablePan={false}
+          maxDistance={6}
+          minDistance={1.5}
         />
       </Canvas>
     </div>

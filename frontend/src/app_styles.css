@@ -83,6 +83,7 @@ h1 {
 }
 .interface-select {
   border-radius: 5px;
+
   background: #3a3a3b;
 }
 
@@ -93,7 +94,48 @@ h1 {
     display: block;
   }
   .interface-item {
-    min-width: 7rem;
+    min-width: 8rem;
+  }
+}
+@media (max-width: 550px) {
+  .interface {
+    height: 100vh;
+
+    display: block;
+  }
+  .interface-item {
+    min-width: 6rem;
     min-height: 3rem;
+  }
+  #menu- div ul .Mui-selected {
+    background: #3a2a2b;
+  }
+  #menu- div ul li {
+    font-size: 10px;
+    padding: 0.1rem auto;
+    min-height: 6px;
+    background: #3a3a3b;
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+
+  #menu- div ul {
+    background: #3a3a3b;
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item div {
+    color: white;
+    font-size: 10px;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item label {
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item span {
+    color: white;
+    font-size: 10px;
+    font-family: "Noto Sans Mono";
   }
 } ;
