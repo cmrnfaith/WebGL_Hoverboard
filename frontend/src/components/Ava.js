@@ -11,6 +11,7 @@ export default function Model({ ...props }) {
     "/ava_" + props.name + ".glb"
   );
   const { actions, names } = useAnimations(animations, group);
+  console.log(actions);
   useEffect(() => {
     console.log(actions);
 

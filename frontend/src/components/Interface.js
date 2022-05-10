@@ -10,66 +10,23 @@ import {
 
 import { useState } from "react";
 
-const defaultBackgrounds = [
-  "sunset",
-  "dawn",
-  "night",
-  "warehouse",
-  "forest",
-  "apartment",
-  "studio",
-  "city",
-  "park",
-  "lobby",
-];
-
-const defaultCameras = [
-  {
-    value: [0, 0.6, 3.8],
-    name: "default",
-    key: 0,
-  },
-  {
-    value: [0.6, 2, 3.8],
-    name: "front",
-    key: 1,
-  },
-  {
-    value: [-0.6, 1.6, -3.8],
-    name: "back",
-    key: 2,
-  },
-  {
-    value: [-3.8, 1.2, 0],
-    name: "left",
-    key: 3,
-  },
-  {
-    value: [3.8, 1.2, 0],
-    name: "right",
-    key: 4,
-  },
-  {
-    value: [0, 5.8, 0],
-    name: "top",
-    key: 5,
-  },
-];
-
-const defaultAnimations = ["Idle", "Dance", "Run", "HipHopDance"];
-
 const Interface = ({
+  defaultBackgrounds,
+  defaultCameras,
+  defaultAnimations,
   setBackGround,
   setCustomBackgroundEnable,
   updateCamera,
   updateAutoRotate,
   updateAnimation,
   setCameraPosition,
+  animation,
 }) => {
   const [camera, setCamera] = useState("default");
   const [autorotate, setAutorotate] = useState(false);
   const [environment, setEnvironment] = useState("dawn");
-  const [animation, setAnimation] = useState("Idle");
+
+  // useEffect(() => {});
 
   function handleBackgroundChange(e) {
     console.log(e.target.value);
@@ -93,7 +50,6 @@ const Interface = ({
   function handleAnimationChange(e) {
     console.log(e.target.value);
     updateAnimation(e.target.value);
-    setAnimation(e.target.value);
   }
 
   function handleAutoRotateChange(e) {
@@ -105,7 +61,7 @@ const Interface = ({
     <div className="interface">
       <div className="interface-item">
         <FormControl fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">Environment</InputLabel>
+          <InputLabel id="demo-simple-select-label">ENVIRONMENT</InputLabel>
           <Select
             label="Camera"
             value={environment}
@@ -113,7 +69,7 @@ const Interface = ({
           >
             {defaultBackgrounds.map((background) => (
               <MenuItem value={background} key={Math.random()}>
-                {background}
+                {background.toUpperCase()}
               </MenuItem>
             ))}
           </Select>
@@ -121,11 +77,11 @@ const Interface = ({
       </div>
       <div className="interface-item">
         <FormControl fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">Camera</InputLabel>
+          <InputLabel id="demo-simple-select-label">CAMERA</InputLabel>
           <Select label="Camera" value={camera} onChange={handleCameraChange}>
             {defaultCameras.map((camera) => (
               <MenuItem value={camera.name} key={camera.key}>
-                {camera.name}
+                {camera.name.toUpperCase()}
               </MenuItem>
             ))}
           </Select>
@@ -135,20 +91,20 @@ const Interface = ({
         <FormControlLabel
           onChange={handleAutoRotateChange}
           control={<Switch value={autorotate} />}
-          label="Auto-Rotate"
+          label="AUTO-ROTATE"
         />
       </FormGroup>
       <div className="interface-item">
         <FormControl fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">Animation</InputLabel>
+          <InputLabel id="demo-simple-select-label">ANIMATION</InputLabel>
           <Select
             label="Camera"
             value={animation}
             onChange={handleAnimationChange}
           >
-            {defaultAnimations.map((animation) => (
-              <MenuItem value={animation} key={Math.random()}>
-                {animation}
+            {defaultAnimations.map((name) => (
+              <MenuItem value={name} key={Math.random()}>
+                {name.toUpperCase()}
               </MenuItem>
             ))}
           </Select>

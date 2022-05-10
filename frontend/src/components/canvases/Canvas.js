@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useState, useRef } from "react";
+import React, { Suspense, useState, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import {
   OrbitControls,
@@ -15,14 +15,61 @@ import Item from "../Item";
 
 const defaultCamera = [0, 0.6, 3.8];
 const defaultBackground = "dawn";
+const defaultBackgrounds = [
+  "sunset",
+  "dawn",
+  "warehouse",
+  "forest",
+  "apartment",
+  "studio",
+  "city",
+  "park",
+  "lobby",
+];
+
+const defaultCameras = [
+  {
+    value: [0, 0.6, 3.8],
+    name: "default",
+    key: 0,
+  },
+  {
+    value: [0.6, 2, 3.8],
+    name: "front",
+    key: 1,
+  },
+  {
+    value: [-0.6, 1.6, -3.8],
+    name: "back",
+    key: 2,
+  },
+  {
+    value: [-3.8, 1.2, 0],
+    name: "left",
+    key: 3,
+  },
+  {
+    value: [3.8, 1.2, 0],
+    name: "right",
+    key: 4,
+  },
+  {
+    value: [0, 5.8, 0],
+    name: "top",
+    key: 5,
+  },
+];
+
+const defaultAnimations = ["", "Idle", "T-Pose"];
 
 const ItemCanvas = (props) => {
   const [backgroundTexture, setBackGroundTexture] = useState(defaultBackground);
   const [customBackgroundEnable, setCustomBackgroundEnable] = useState(false);
   const [cameraPosition, setCameraPosition] = useState(defaultCamera);
   const [autoRotate, setAutoRotate] = useState(false);
+  const [animations, setAnimations] = useState(defaultAnimations);
+  const [animation, setAnimation] = useState("");
 
-  useEffect(() => {}, []);
   const orbitControlsRef = useRef(null);
 
   function updateCamera() {
@@ -38,9 +85,24 @@ const ItemCanvas = (props) => {
     // Needs to update perspective Camera .updateProjectionMatrix ()
   }
 
+  function updateAnimationList(list) {
+    if (list[0]) {
+      updateAnimation(list[0]);
+      console.log(list[0]);
+    }
+    setAnimations(list);
+  }
+
+  function updateAnimation(animationName) {
+    setAnimation(animationName);
+  }
+
   return (
     <div className="canvas">
       <Interface
+        defaultAnimations={animations}
+        defaultCameras={defaultCameras}
+        defaultBackgrounds={defaultBackgrounds}
         backgroundTexture={backgroundTexture}
         setBackGround={setBackGroundTexture}
         cameraPosition={cameraPosition}
@@ -48,6 +110,8 @@ const ItemCanvas = (props) => {
         setCustomBackgroundEnable={setCustomBackgroundEnable}
         setCameraPosition={setCameraPosition}
         updateAutoRotate={updateAutoRotate}
+        updateAnimation={updateAnimation}
+        animation={animation}
       />
       <Canvas id="canvas" shadows>
         <OrbitControls ref={orbitControlsRef} autoRotate={autoRotate}>
@@ -86,6 +150,8 @@ const ItemCanvas = (props) => {
                   ? props.match.params.collection
                   : props.collection
               }
+              setAnimations={updateAnimationList}
+              animation={animation}
             />
           </Float>
 

@@ -11,7 +11,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-const item = "white";
+const collection = "Testing";
+const item = "animations";
 const App = () => {
   function withProps(Component, props) {
     return function (matchProps) {
@@ -21,7 +22,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch className="content">
-        <Route path="/" component={withProps(JetpackCanvas, { item })} />
+        <Route
+          exact
+          path="/"
+          component={withProps(Canvas, { collection, item })}
+        />
 
         <Route path="/collection/:collection/:item" component={Canvas} />
         <Route path="/hoverboard" component={HoverboardCanvas} />
