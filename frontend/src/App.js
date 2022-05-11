@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import HoverboardCanvas from "./components/canvases/HoverboardCanvas.js";
-import JetpackCanvas from "./components/canvases/JetpackCanvas.js";
-import AvaCanvas from "./components/canvases/AvaCanvas.js";
+import StakingCanvas from "./components/canvases/StakingCanvas.js";
 import Canvas from "./components/canvases/Canvas.js";
 
 import "./app_styles.css";
@@ -27,15 +25,16 @@ const App = () => {
           path="/"
           component={withProps(Canvas, { collection, item })}
         />
+        <Route path="/staking/:collection/:item" component={StakingCanvas} />
 
         <Route path="/collection/:collection/:item" component={Canvas} />
-        <Route path="/hoverboard" component={HoverboardCanvas} />
+        {/* <Route path="/hoverboard" component={HoverboardCanvas} />
         <Route path="/jetpack/:item" component={JetpackCanvas} />
         <Route path="/jetpack" component={JetpackCanvas} />
         <Route path="/ava/:key" component={AvaCanvas} />
         <Route path="/ava" component={AvaCanvas} />
         <Route path="/hoverboard/:key" component={HoverboardCanvas} />
-        <Route path="/hoverboard" component={HoverboardCanvas} />
+        <Route path="/hoverboard" component={HoverboardCanvas} /> */}
         <Route render={() => <h1>Page not found</h1>} />
       </Switch>
     </BrowserRouter>
