@@ -3,13 +3,16 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var apiRouter = require("./routes/api");
+const multer = require("multer");
 
 var app = express();
-const port = 4000;
+app.use(cors());
+const port = process.env.PORT || 4000;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -24,6 +27,29 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/api", apiRouter);
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+var upload = multer({ storage: storage }).single("file");
+// route for file upload
+app.post("/upload/file", (req, res) => {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+    return res.status(200).send(req.file);
+  });
+});
+
+app.get("/download/file/:filename", (req, res) => {});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

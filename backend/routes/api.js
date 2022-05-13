@@ -3,7 +3,7 @@ var request = require("request");
 const axios = require("axios");
 var router = express.Router();
 
-router.get("/collection/:collection/item/:item(*)", async function (req, res) {
+router.get("/collection/:collection/:item", async function (req, res) {
   var collection = req.params.collection;
   var item = req.params.item;
   var url =
@@ -24,14 +24,6 @@ router.get("/collection/:collection/item/:item(*)", async function (req, res) {
 
 async function generateV4ReadSignedUrl(url) {
   return await axios.get(url);
-  // .then(async (res) => {
-  //   console.log(`statusCode: ${res.status}`);
-  //   console.log(res.data);
-  //   return await res.data;
-  // })
-  // .catch((error) => {
-  //   console.error(error);
-  // });
 }
 
 module.exports = router;
