@@ -1,8 +1,6 @@
 import {
   Switch,
   FormControlLabel,
-  FormGroup,
-  FormControl,
   InputLabel,
   Select,
   MenuItem,
@@ -60,7 +58,7 @@ const Interface = ({
   return (
     <div className="interface">
       <div className="interface-item">
-        <FormControl fullWidth className="interface-select">
+        <div fullWidth className="interface-select">
           <InputLabel id="demo-simple-select-label">ENVIRONMENT</InputLabel>
           <Select
             label="Camera"
@@ -73,10 +71,10 @@ const Interface = ({
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </div>
       </div>
       <div className="interface-item">
-        <FormControl fullWidth className="interface-select">
+        <div fullWidth className="interface-select">
           <InputLabel id="demo-simple-select-label">CAMERA</InputLabel>
           <Select label="Camera" value={camera} onChange={handleCameraChange}>
             {defaultCameras.map((camera) => (
@@ -85,17 +83,17 @@ const Interface = ({
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </div>
       </div>
-      <FormGroup className="interface-item">
+      <div className="interface-item">
         <FormControlLabel
           onChange={handleAutoRotateChange}
           control={<Switch value={autorotate} />}
           label="AUTO-ROTATE"
         />
-      </FormGroup>
+      </div>
       <div className="interface-item">
-        <FormControl fullWidth className="interface-select">
+        <div fullWidth className="interface-select">
           <InputLabel id="demo-simple-select-label">ANIMATION</InputLabel>
           <Select
             label="Camera"
@@ -108,7 +106,7 @@ const Interface = ({
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </div>
       </div>
     </div>
   );
