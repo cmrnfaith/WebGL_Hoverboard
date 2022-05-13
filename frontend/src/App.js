@@ -1,52 +1,47 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import Unity, { UnityContext } from "react-unity-webgl";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const unityContext = new UnityContext({
-  productName: "Hoverboard Test",
-  companyName: "Cameron",
-  loaderUrl: "webgl/Build.loader.js",
-  dataUrl: "webgl/Build.data",
-  frameworkUrl: "webgl/Build.framework.js",
-  codeUrl: "webgl/Build.wasm",
-});
+import StakingCanvas from "./components/canvases/StakingCanvas.js";
+import Canvas from "./components/canvases/Canvas.js";
+import Upload from "./components/Upload.js";
 
-function App() {
-  // const [isUnityMounted, setIsUnityMounted] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [progression, setProgression] = useState(0);
+import "./app_styles.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-  useEffect(() => {
-    unityContext.on("progress", handleOnUnityProgress);
-    unityContext.on("loaded", handleOnUnityLoaded);
-  });
-
-  // Built-in event invoked when the Unity app is loaded.
-  function handleOnUnityLoaded() {
-    setIsLoaded(true);
+const collection = "Testing";
+const item = "animations";
+const App = () => {
+  function withProps(Component, props) {
+    return function (matchProps) {
+      return <Component {...props} {...matchProps} />;
+    };
   }
-  // Built-in event invoked when the Unity app's progress has changed.
-  function handleOnUnityProgress(progression) {
-    setProgression(progression);
-  }
-
   return (
-    <div className="unity-container">
-      {/* The loading screen will be displayed here. */}
-      {isLoaded === false && (
-        <div className="loading-overlay">
-          <div className="progress-bar">
-            <div
-              className="progress-bar-fill"
-              style={{ width: progression * 100 + "%" }}
-            />
-          </div>
-        </div>
-      )}
-      {/* The Unity app will be rendered here. */}
-      <Unity className="unity-canvas" unityContext={unityContext} />
-    </div>
-  );
-}
+    <BrowserRouter>
+      <Switch className="content">
+        <Route
+          exact
+          path="/"
+          component={withProps(Canvas, { collection, item })}
+        />
+        <Route path="/staking/:collection/:item" component={StakingCanvas} />
 
+        <Route path="/collection/:collection/:item" component={Canvas} />
+
+        <Route path="/upload" component={Upload} />
+        {/* <Route path="/preview/:item" component={UploadCanvas} /> */}
+        {/* <Route path="/hoverboard" component={HoverboardCanvas} />
+        <Route path="/jetpack/:item" component={JetpackCanvas} />
+        <Route path="/jetpack" component={JetpackCanvas} />
+        <Route path="/ava/:key" component={AvaCanvas} />
+        <Route path="/ava" component={AvaCanvas} />
+        <Route path="/hoverboard/:key" component={HoverboardCanvas} />
+        <Route path="/hoverboard" component={HoverboardCanvas} /> */}
+        <Route render={() => <h1>Page not found</h1>} />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 export default App;

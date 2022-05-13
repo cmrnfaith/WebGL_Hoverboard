@@ -1,0 +1,263 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+Mono);
+
+/*app_styles.css*/
+* {
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #ccc;
+  font-family: "Noto Sans Mono", -apple-system, BlinkMacSystemFont, avenir next,
+    avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial,
+    sans-serif;
+}
+h1 {
+  position: absolute;
+  top: 43px;
+  left: 140px;
+  padding: 0;
+  margin: 40px;
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 0.7em;
+  letter-spacing: -4px;
+  color: #272730;
+}
+
+h2 {
+  position: absolute;
+  top: 93px;
+  left: 142px;
+  padding: 0;
+  margin: 40px;
+  font-size: 2em;
+  font-weight: 600;
+  line-height: 0.7em;
+  letter-spacing: -2px;
+  color: #272730;
+}
+
+.picker {
+  position: absolute !important;
+  top: 74px;
+  left: 70px;
+  width: 90px !important;
+  height: 90px !important;
+}
+
+.canvas-hoverboard {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+}
+
+.canvas {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.staking {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.canvas-ava {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.interface {
+  position: absolute;
+  height: 10vh;
+
+  max-width: 100vw;
+  overflow: hidden;
+  top: 0;
+  z-index: 1;
+  display: flex;
+}
+
+.interface-item div {
+  color: white;
+  font-size: 14px;
+  font-family: "Noto Sans Mono";
+}
+.interface-item label {
+  color: white;
+  font-family: "Noto Sans Mono";
+}
+.interface-item span {
+  color: white;
+  font-size: 14px;
+  font-family: "Noto Sans Mono";
+}
+
+.interface-item {
+  background: #333335;
+  color: white;
+  min-width: 4vw;
+  max-width: 10vw;
+  text-color: white;
+  border-radius: 5px;
+  align-items: center;
+  padding: 0 1.5vw;
+  margin: 1vh 3vw;
+  font-size: 14px;
+}
+.interface-select {
+  border-radius: 5px;
+
+  background: #3a3a3b;
+}
+
+#menu- div ul .Mui-selected {
+  background: #3a2a2b;
+}
+#menu- div ul li {
+  font-size: 10px;
+  padding: 0.1rem auto;
+  background: #3a3a3b;
+  color: white;
+  font-family: "Noto Sans Mono";
+}
+
+#menu- div ul {
+  background: #3a3a3b;
+  color: white;
+  font-family: "Noto Sans Mono";
+}
+@media (max-width: 2550px) {
+  .interface {
+    height: 100vh;
+
+    display: block;
+  }
+  .interface-item {
+    min-width: 6rem;
+    min-height: 3rem;
+  }
+  .interface-select {
+    padding: 0.2rem 0.1rem;
+  }
+  #menu- div ul .Mui-selected {
+    background: #3a2a2b;
+  }
+  #menu- div ul li {
+    font-size: 10px;
+    padding: 0.1rem auto;
+    min-height: 6px;
+    background: #3a3a3b;
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+
+  #menu- div ul {
+    background: #3a3a3b;
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item div {
+    color: white;
+    font-size: 10px;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item label {
+    color: white;
+    font-family: "Noto Sans Mono";
+  }
+  .interface-item span {
+    color: white;
+    font-size: 10px;
+    font-family: "Noto Sans Mono";
+  }
+}
+/* Upload file Styling */
+.wrap {
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+}
+.upload-btn {
+  margin-top: 2em;
+}
+.dropzone {
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.placeholder {
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 0.5em;
+  background: #eee;
+  padding: 2em;
+  text-align: center;
+}
+.placeholder p {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.upload-btn input {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload-btn label {
+  color: #353535;
+  background-color: #eee;
+  border: 0;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+  font-size: 1rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+.upload-btn svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  margin-right: 0.25em;
+}
+
+.css-o943dk-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled {
+  color: rgba(255, 255, 255, 0.58) !important;
+}
+
+.css-10botns-MuiInputBase-input-MuiFilledInput-input.Mui-disabled {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.58) !important;
+}
+.Mui-disabled {
+  color: rgba(255, 255, 255, 0.58);
+}
