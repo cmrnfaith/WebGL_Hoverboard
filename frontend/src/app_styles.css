@@ -107,11 +107,11 @@ h2 {
   background: #333335;
   color: white;
   min-width: 4vw;
-  max-width: 10vw;
+  max-width: 9rem;
   text-color: white;
   border-radius: 5px;
   align-items: center;
-  padding: 0 1.5vw;
+  padding: 0.1rem 0.3rem;
   margin: 1vh 3vw;
   font-size: 14px;
 }
@@ -137,6 +137,7 @@ h2 {
   color: white;
   font-family: "Noto Sans Mono";
 }
+
 @media (max-width: 2550px) {
   .interface {
     height: 100vh;
@@ -145,7 +146,6 @@ h2 {
   }
   .interface-item {
     min-width: 6rem;
-    min-height: 3rem;
   }
   .interface-select {
     padding: 0.2rem 0.1rem;
@@ -174,12 +174,23 @@ h2 {
   }
   .interface-item label {
     color: white;
+    margin-right: 0;
     font-family: "Noto Sans Mono";
   }
   .interface-item span {
     color: white;
+
     font-size: 10px;
     font-family: "Noto Sans Mono";
+  }
+}
+@media (max-width: 600px) {
+  #demo-simple-select-label {
+    font-size: 11px !important;
+  }
+  .MuiSelect-select {
+    padding: 5px 8px !important;
+    padding-right: 32px !important;
   }
 }
 /* Upload file Styling */

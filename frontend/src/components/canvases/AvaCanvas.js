@@ -10,7 +10,7 @@ import {
 } from "@react-three/drei";
 
 import Loading from "../Loading";
-import Interface from "../Interface";
+import AvaInterface from "../AvaInterface";
 import Item from "../Item";
 
 const defaultCamera = [0, 0.6, 3.8];
@@ -62,7 +62,7 @@ const defaultCameras = [
 
 const defaultAnimations = ["", "Idle", "T-Pose"];
 
-const ItemCanvas = (props) => {
+const AvaCanvas = (props) => {
   const [backgroundTexture, setBackGroundTexture] = useState(defaultBackground);
   const [customBackgroundEnable, setCustomBackgroundEnable] = useState(false);
   const [cameraPosition, setCameraPosition] = useState(defaultCamera);
@@ -99,7 +99,7 @@ const ItemCanvas = (props) => {
 
   return (
     <div className="canvas">
-      <Interface
+      <AvaInterface
         defaultAnimations={animations}
         defaultCameras={defaultCameras}
         defaultBackgrounds={defaultBackgrounds}
@@ -179,4 +179,4 @@ const ItemCanvas = (props) => {
   );
 };
 
-export default ItemCanvas;
+export default AvaCanvas;

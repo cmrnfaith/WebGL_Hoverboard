@@ -13,6 +13,7 @@ import Loading from "../Loading";
 import LocalItem from "../LocalItem";
 const defaultCamera = [0, 0.4, 3.8];
 const defaultLightPosition = [0.6, 6.8, 3];
+const defaultAnimations = ["", "Idle", "T-Pose"];
 
 const UploadCanvas = (props) => {
   const [lightPosition, setLightPosition] = useState(defaultLightPosition);
@@ -26,6 +27,8 @@ const UploadCanvas = (props) => {
   const [shadowScale, setShadowScale] = useState(15);
   const [shadowBlur, setShadowBlur] = useState(1);
   const [shadowFar, setShadowFar] = useState(8);
+  const [animations, setAnimations] = useState(defaultAnimations);
+  const [animation, setAnimation] = useState("");
 
   function Dolly() {
     useFrame((state) => {
@@ -40,6 +43,21 @@ const UploadCanvas = (props) => {
       // console.log(state);
     });
     return null;
+  }
+
+  function updateAnimationList(list) {
+    if (list[0]) {
+      updateAnimation(list[0]);
+      console.log(list[0]);
+    }
+    if (list.length === 0) {
+      animation = null;
+    }
+    setAnimations(list);
+  }
+
+  function updateAnimation(animationName) {
+    setAnimation(animationName);
   }
 
   return (
@@ -67,6 +85,9 @@ const UploadCanvas = (props) => {
         setShadowBlur={setShadowBlur}
         shadowFar={shadowFar}
         setShadowFar={setShadowFar}
+        defaultAnimations={animations}
+        updateAnimation={updateAnimation}
+        animation={animation}
       />
       <Canvas id="canvas" shadows>
         <OrbitControls autoRotate={false}>
@@ -90,7 +111,11 @@ const UploadCanvas = (props) => {
             floatIntensity={0}
             speed={4}
           >
-            <LocalItem selectedFile={props.selectedFile} />
+            <LocalItem
+              selectedFile={props.selectedFile}
+              setAnimations={updateAnimationList}
+              animation={animation}
+            />
           </Float>
           <ContactShadows
             opacity={1}

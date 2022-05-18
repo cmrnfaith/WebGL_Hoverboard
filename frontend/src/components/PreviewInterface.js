@@ -1,6 +1,9 @@
 import {
   Radio,
   FormControlLabel,
+  InputLabel,
+  Select,
+  MenuItem,
   RadioGroup,
   FormLabel,
   TextField,
@@ -26,6 +29,9 @@ const PreviewInterface = ({
   setShadowBlur,
   shadowFar,
   setShadowFar,
+  defaultAnimations,
+  updateAnimation,
+  animation,
 }) => {
   const [backgroundType, setBackgroundType] = useState("gradient");
   const [lightX, setLightX] = useState(lightPosition[0]);
@@ -118,10 +124,15 @@ const PreviewInterface = ({
     setLightZ(e.target.value);
   }
 
+  function handleAnimationChange(e) {
+    console.log(e.target.value);
+    updateAnimation(e.target.value);
+  }
+
   return (
     <div className="interface">
       <div className="interface-item">
-        <div fullWidth className="interface-select">
+        <div className="interface-select">
           <FormLabel id="demo-controlled-radio-buttons-group">
             BACKGROUND
           </FormLabel>
@@ -145,7 +156,7 @@ const PreviewInterface = ({
         </div>
       </div>
       <div className="interface-item">
-        <div fullWidth className="interface-select">
+        <div className="interface-select">
           <FormLabel id="demo-controlled-radio-buttons-group">COLOR</FormLabel>
           <TextField
             id="filled-basic-1"
@@ -166,7 +177,7 @@ const PreviewInterface = ({
         </div>
       </div>
       <div className="interface-item">
-        <div fullWidth className="interface-select">
+        <div className="interface-select">
           <FormLabel id="demo-controlled-radio-buttons-group">
             SHADOWS
           </FormLabel>
@@ -199,7 +210,7 @@ const PreviewInterface = ({
         </div>
       </div>
       <div className="interface-item">
-        <div fullWidth className="interface-select">
+        <div className="interface-select">
           <FormLabel id="demo-controlled-radio-buttons-group">
             LIGHTING
           </FormLabel>
@@ -241,6 +252,26 @@ const PreviewInterface = ({
             onChange={handleZChange}
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           />
+        </div>
+      </div>
+      <div className="interface-item">
+        <div className="interface-select">
+          <InputLabel id="demo-simple-select-label">ANIMATION</InputLabel>
+          {animation ? (
+            <Select
+              label="Animation"
+              value={animation}
+              onChange={handleAnimationChange}
+            >
+              {defaultAnimations.map((name) => (
+                <MenuItem value={name} key={Math.random()}>
+                  {name.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          ) : (
+            <div>No Animations Detected</div>
+          )}
         </div>
       </div>
     </div>

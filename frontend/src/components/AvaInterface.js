@@ -8,7 +8,7 @@ import {
 
 import { useState } from "react";
 
-const Interface = ({
+const AvaInterface = ({
   defaultBackgrounds,
   defaultCameras,
   defaultAnimations,
@@ -86,19 +86,17 @@ const Interface = ({
         </div>
       </div>
       <div className="interface-item">
-        <div fullWidth className="interface-select">
-          <FormControlLabel
-            onChange={handleAutoRotateChange}
-            control={<Switch value={autorotate} />}
-            label="AUTO-ROTATE"
-          />
-        </div>
+        <FormControlLabel
+          onChange={handleAutoRotateChange}
+          control={<Switch value={autorotate} />}
+          label="AUTO-ROTATE"
+        />
       </div>
       <div className="interface-item">
         <div fullWidth className="interface-select">
           <InputLabel id="demo-simple-select-label">ANIMATION</InputLabel>
           <Select
-            label="Animation"
+            label="Camera"
             value={animation}
             onChange={handleAnimationChange}
           >
@@ -113,4 +111,4 @@ const Interface = ({
     </div>
   );
 };
-export default Interface;
+export default AvaInterface;

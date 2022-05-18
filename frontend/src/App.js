@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import StakingCanvas from "./components/canvases/StakingCanvas.js";
 import Canvas from "./components/canvases/Canvas.js";
+import AvaCanvas from "./components/canvases/AvaCanvas.js";
 import Upload from "./components/Upload.js";
 
 import "./app_styles.css";
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/staking/:collection/:item" component={StakingCanvas} />
 
         <Route path="/collection/:collection/:item" component={Canvas} />
+        <Route path="/viewer/:collection/:item" component={AvaCanvas} />
 
         <Route path="/upload" component={Upload} />
         {/* <Route path="/preview/:item" component={UploadCanvas} /> */}
