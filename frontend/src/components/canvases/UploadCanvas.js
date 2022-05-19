@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useRef } from "react";
 import { angleToRadians } from "../../utils/angle";
 import {
   OrbitControls,
@@ -8,6 +8,7 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 import PreviewInterface from "../PreviewInterface";
+import { SkeletonHelper } from "three";
 
 import Loading from "../Loading";
 import LocalItem from "../LocalItem";
@@ -29,6 +30,10 @@ const UploadCanvas = (props) => {
   const [shadowFar, setShadowFar] = useState(8);
   const [animations, setAnimations] = useState(defaultAnimations);
   const [animation, setAnimation] = useState("");
+  const [skeletonHelpers, setSkeletonHelpers] = useState([]);
+  const [skeleton, setSkeleton] = useState(false);
+  const [content, setContent] = useState(null);
+  const [updateState, setUpdateState] = useState(true);
 
   function Dolly() {
     useFrame((state) => {
@@ -40,9 +45,28 @@ const UploadCanvas = (props) => {
         }
       });
 
-      // console.log(state);
+      if (updateState && content) {
+        if (skeletonHelpers.length) {
+          skeletonHelpers.forEach((helper) => state.scene.remove(helper));
+        }
+        content.traverse((node) => {
+          if (node.isMesh && node.skeleton && skeleton) {
+            const helper = new SkeletonHelper(node.skeleton.bones[0].parent);
+            helper.material.linewidth = 3;
+            state.scene.add(helper);
+            skeletonHelpers.push(helper);
+          }
+        });
+        setUpdateState(false);
+      }
+
+      // console.log(state.clock.elapsedTime % 60);
     });
     return null;
+  }
+  function updateSkeleton(value) {
+    setSkeleton(value);
+    setUpdateState(true);
   }
 
   function updateAnimationList(list) {
@@ -88,10 +112,12 @@ const UploadCanvas = (props) => {
         defaultAnimations={animations}
         updateAnimation={updateAnimation}
         animation={animation}
+        setSkeleton={updateSkeleton}
+        skeleton={skeleton}
       />
       <Canvas id="canvas" shadows>
         <OrbitControls autoRotate={false}>
-          <mesh position={[0, 0.5, 0]}></mesh>
+          <mesh position={[0, 1, 0]}></mesh>
         </OrbitControls>
         <ambientLight intensity={ambientLightIntensity} />
         <directionalLight
@@ -115,6 +141,7 @@ const UploadCanvas = (props) => {
               selectedFile={props.selectedFile}
               setAnimations={updateAnimationList}
               animation={animation}
+              setContent={setContent}
             />
           </Float>
           <ContactShadows
@@ -129,7 +156,7 @@ const UploadCanvas = (props) => {
         <OrbitControls
           minPolarAngle={angleToRadians(0)}
           maxPolarAngle={angleToRadians(90)}
-          target={[0, 0.4, 0]}
+          target={[0, 0.7, 0]}
           enableZoom={true}
           enablePan={false}
           maxDistance={6}

@@ -7,6 +7,7 @@ import {
   RadioGroup,
   FormLabel,
   TextField,
+  Checkbox,
 } from "@mui/material";
 
 import { useState } from "react";
@@ -32,6 +33,8 @@ const PreviewInterface = ({
   defaultAnimations,
   updateAnimation,
   animation,
+  setSkeleton,
+  skeleton,
 }) => {
   const [backgroundType, setBackgroundType] = useState("gradient");
   const [lightX, setLightX] = useState(lightPosition[0]);
@@ -127,6 +130,11 @@ const PreviewInterface = ({
   function handleAnimationChange(e) {
     console.log(e.target.value);
     updateAnimation(e.target.value);
+  }
+
+  function handleSkeletonChange(e) {
+    console.log(e.target.checked);
+    setSkeleton(e.target.checked);
   }
 
   return (
@@ -272,6 +280,12 @@ const PreviewInterface = ({
           ) : (
             <div>No Animations Detected</div>
           )}
+        </div>
+      </div>
+      <div className="interface-item">
+        <div className="interface-select">
+          <InputLabel id="demo-simple-select-label">SHOW SKELETON</InputLabel>
+          <Checkbox value={skeleton} onChange={handleSkeletonChange} />
         </div>
       </div>
     </div>
