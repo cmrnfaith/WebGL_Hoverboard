@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/staking/:collection/:item" component={StakingCanvas} />
 
         <Route path="/collection/:collection/:item" component={Canvas} />
-        <Route path="/viewer/:collection/:item" component={AvaCanvas} />
+        <Route path="/viewer/ava/:item" component={AvaCanvas} />
 
         <Route path="/upload" component={Upload} />
         {/* <Route path="/preview/:item" component={UploadCanvas} /> */}

@@ -1,111 +1,66 @@
-import {
-  Switch,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { update } from "@tweenjs/tween.js";
 
 import { useState } from "react";
 
 const AvaInterface = ({
-  defaultBackgrounds,
   defaultCameras,
-  defaultAnimations,
-  setBackGround,
-  setCustomBackgroundEnable,
-  updateCamera,
-  updateAutoRotate,
-  updateAnimation,
   setCameraPosition,
-  animation,
+  updateCameraPosition,
 }) => {
-  const [camera, setCamera] = useState("default");
-  const [autorotate, setAutorotate] = useState(false);
-  const [environment, setEnvironment] = useState("dawn");
-
   // useEffect(() => {});
 
-  function handleBackgroundChange(e) {
-    console.log(e.target.value);
-    setBackGround(e.target.value);
-    setCustomBackgroundEnable(true);
-    setEnvironment(e.target.value);
-  }
-
-  function handleCameraChange(e) {
+  function handleCameraChange(new_camera) {
     console.log(
-      defaultCameras.filter((camera) => camera.name === e.target.value)[0].name
+      defaultCameras.filter((camera) => camera.name === new_camera)[0]
     );
     setCameraPosition(
-      defaultCameras.filter((camera) => camera.name === e.target.value)[0].value
+      defaultCameras.filter((camera) => camera.name === new_camera)[0].value
     );
-    setCamera(
-      defaultCameras.filter((camera) => camera.name === e.target.value)[0].name
-    );
-    updateCamera();
-  }
-  function handleAnimationChange(e) {
-    console.log(e.target.value);
-    updateAnimation(e.target.value);
-  }
 
-  function handleAutoRotateChange(e) {
-    setAutorotate(!e.target.value);
-    updateAutoRotate();
+    updateCameraPosition(
+      defaultCameras.filter((camera) => camera.name === new_camera)[0]
+    );
+
+    // updateCamera();
   }
 
   return (
-    <div className="interface">
+    <div className="interface-ava">
       <div className="interface-item">
-        <div fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">ENVIRONMENT</InputLabel>
-          <Select
-            label="Camera"
-            value={environment}
-            onChange={handleBackgroundChange}
+        <div className="interface-select">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleCameraChange("Heart");
+            }}
           >
-            {defaultBackgrounds.map((background) => (
-              <MenuItem value={background} key={Math.random()}>
-                {background.toUpperCase()}
-              </MenuItem>
-            ))}
-          </Select>
+            HEART
+          </Button>
         </div>
       </div>
       <div className="interface-item">
-        <div fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">CAMERA</InputLabel>
-          <Select label="Camera" value={camera} onChange={handleCameraChange}>
-            {defaultCameras.map((camera) => (
-              <MenuItem value={camera.name} key={camera.key}>
-                {camera.name.toUpperCase()}
-              </MenuItem>
-            ))}
-          </Select>
+        <div className="interface-select">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleCameraChange("Head");
+            }}
+          >
+            MIND
+          </Button>
         </div>
       </div>
       <div className="interface-item">
-        <FormControlLabel
-          onChange={handleAutoRotateChange}
-          control={<Switch value={autorotate} />}
-          label="AUTO-ROTATE"
-        />
-      </div>
-      <div className="interface-item">
-        <div fullWidth className="interface-select">
-          <InputLabel id="demo-simple-select-label">ANIMATION</InputLabel>
-          <Select
-            label="Camera"
-            value={animation}
-            onChange={handleAnimationChange}
+        <div className="interface-select">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleCameraChange("Default");
+            }}
           >
-            {defaultAnimations.map((name) => (
-              <MenuItem value={name} key={Math.random()}>
-                {name.toUpperCase()}
-              </MenuItem>
-            ))}
-          </Select>
+            SOUL
+          </Button>
         </div>
       </div>
     </div>
