@@ -403,25 +403,23 @@ h2 {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 468px;
-  top: 464.1px;
+  left: 462px;
+  top: 468px;
 }
 
 .ava-plus-icon {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 436.5px;
-  top: 468px;
+  left: 462px;
+  top: 436px;
 }
 
 .ava-text {
-  /* 90º200% – 390 */
-
   position: absolute;
-  width: 123px;
+  width: 65px;
   height: 17px;
-  left: 354px;
+  left: 421px;
   top: 24px;
 
   font-family: "Noto Sans Mono";
@@ -435,6 +433,19 @@ h2 {
   /* Light Gray */
 
   color: #9aa0ab;
+}
+
+.ava-text-logo {
+  /* AVA Logo */
+
+  position: absolute;
+  width: 80.64px;
+  height: 24px;
+  left: 20px;
+  top: 400px;
+
+  mix-blend-mode: normal;
+  opacity: 1;
 }
 
 .MuiButton-root {

@@ -104,7 +104,7 @@ const AvaCanvas = (props) => {
   }
 
   function calcNewCoords(oldCoords, targetCoords, zoomIn) {
-    var fullDistance = cubeRootCoords(oldCoords);
+    // var fullDistance = cubeRootCoords(oldCoords);
     var newX = oldCoords.x;
     var newY = oldCoords.y;
     var newZ = oldCoords.z;

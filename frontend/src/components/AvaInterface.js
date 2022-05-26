@@ -3,6 +3,7 @@ import { ReactComponent as TargetDefault } from "../images/fi_target.svg";
 import { ReactComponent as HexagonDefault } from "../images/fi_hexagon.svg";
 import { ReactComponent as MinusDefault } from "../images/fi_minus.svg";
 import { ReactComponent as PlusDefault } from "../images/fi_plus.svg";
+import { ReactComponent as AvaDefault } from "../images/fi_ava.svg";
 import { radToDegrees } from "../utils/radToAngle";
 
 const AvaInterface = ({
@@ -97,8 +98,7 @@ const AvaInterface = ({
       </div>
       <div className="interface-right"></div>
       <div className="ava-text">
-        {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}%{" "}
-        - {avaNumber}
+        {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}%
       </div>
       <div
         className="ava-plus-icon"
@@ -115,6 +115,9 @@ const AvaInterface = ({
         }}
       >
         <MinusDefault />
+      </div>
+      <div className="ava-text-logo">
+        <AvaDefault />
       </div>
     </div>
   );
