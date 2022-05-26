@@ -96,26 +96,28 @@ const AvaInterface = ({
           />
         </div>
       </div>
-      <div className="interface-right"></div>
+      <div className="interface-right">
+        <div
+          className="ava-plus-icon"
+          onClick={() => {
+            zoomIn(selectedCamera);
+          }}
+        >
+          <PlusDefault />
+        </div>
+        <div
+          className="ava-minus-icon"
+          onClick={() => {
+            zoomOut(selectedCamera);
+          }}
+        >
+          <MinusDefault />
+        </div>
+      </div>
       <div className="ava-text">
         {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}%
       </div>
-      <div
-        className="ava-plus-icon"
-        onClick={() => {
-          zoomIn(selectedCamera);
-        }}
-      >
-        <PlusDefault />
-      </div>
-      <div
-        className="ava-minus-icon"
-        onClick={() => {
-          zoomOut(selectedCamera);
-        }}
-      >
-        <MinusDefault />
-      </div>
+
       <div className="ava-text-logo">
         <AvaDefault />
       </div>

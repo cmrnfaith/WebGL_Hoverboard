@@ -399,17 +399,17 @@ h2 {
 
 .ava-minus-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 91.5vw;
+  width: 5vw;
+  height: 5vw;
+  left: 3.75vw;
   top: 93.6vh;
 }
 
 .ava-plus-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 91.5vw;
+  width: 5vw;
+  height: 5vw;
+  left: 3.75vw;
   top: 87.2vh;
 }
 
