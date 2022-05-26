@@ -288,7 +288,6 @@ h2 {
 .interface-left {
   position: absolute;
   height: 100vh;
-  max-width: 64px;
   width: 12.5vw;
 
   left: 0px;
@@ -303,10 +302,9 @@ h2 {
 .interface-right {
   position: absolute;
   height: 100vh;
-  max-width: 64px;
-  width: 12.5vw;
+  /* width: 12.8vw; */
 
-  left: 77.5vw;
+  left: 87.5vw;
   top: 0px;
 
   /* Dark Gray */
@@ -317,9 +315,9 @@ h2 {
 
 .interface-ava-button-1 {
   position: absolute;
-  max-width: 64px;
+  /* max-width: 64px; */
   width: 12.5vw;
-  max-height: 64px;
+  /* max-height: 64px; */
   height: 12.5vw;
   top: 0;
   left: 0;
@@ -329,11 +327,11 @@ h2 {
 }
 .interface-ava-button-2 {
   position: absolute;
-  max-width: 64px;
+  /* max-width: 64px; */
   width: 12.5vw;
-  max-height: 64px;
+  /* max-height: 64px; */
   height: 12.5vw;
-  top: 64px;
+  top: 12.5vw;
   left: 0;
   border-width: 0px 0px 1px 0px;
   border-style: solid;
@@ -341,11 +339,9 @@ h2 {
 }
 .interface-ava-button-3 {
   position: absolute;
-  max-width: 64px;
   width: 12.5vw;
-  max-height: 64px;
   height: 12.5vw;
-  top: 128px;
+  top: 25vw;
   left: 0;
   border-width: 0px 0px 1px 0px;
   border-style: solid;
@@ -393,8 +389,10 @@ h2 {
 
 .ava-icon {
   position: absolute;
-  left: 31.25%;
-  right: 31.25%;
+  width: 5vw;
+  height: 5vw;
+  left: 28%;
+  right: 28%;
   top: 31.25%;
   bottom: 31.25%;
 }
@@ -403,24 +401,24 @@ h2 {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 462px;
-  top: 468px;
+  left: 91.5vw;
+  top: 93.6vh;
 }
 
 .ava-plus-icon {
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 462px;
-  top: 436px;
+  left: 91.5vw;
+  top: 87.2vh;
 }
 
 .ava-text {
   position: absolute;
   width: 65px;
   height: 17px;
-  left: 421px;
-  top: 24px;
+  left: 80.5vw;
+  top: 5vh;
 
   font-family: "Noto Sans Mono";
   font-style: normal;
@@ -439,13 +437,10 @@ h2 {
   /* AVA Logo */
 
   position: absolute;
-  width: 80.64px;
-  height: 24px;
-  left: 20px;
-  top: 400px;
-
-  mix-blend-mode: normal;
-  opacity: 1;
+  width: 16vw;
+  height: 5vh;
+  left: 3.5vw;
+  top: 80vh;
 }
 
 .MuiButton-root {
