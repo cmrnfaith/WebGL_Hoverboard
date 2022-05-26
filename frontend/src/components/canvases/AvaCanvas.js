@@ -11,23 +11,11 @@ import {
 
 import Loading from "../Loading";
 import AvaInterface from "../AvaInterface";
-import animate from "../Animate";
 import Item from "../Item";
 import * as TWEEN from "@tweenjs/tween.js";
 
-const defaultCamera = [0, 0.6, 3.8];
+const defaultCamera = [-0.35, 1.4, 2.2];
 const defaultBackground = "dawn";
-const defaultBackgrounds = [
-  "sunset",
-  "dawn",
-  "warehouse",
-  "forest",
-  "apartment",
-  "studio",
-  "city",
-  "park",
-  "lobby",
-];
 
 const defaultCameras = [
   {
@@ -35,6 +23,7 @@ const defaultCameras = [
     name: "Default",
     target: [0, 0.8, 0],
     rotation: [0, 0, 0],
+    rotate: true,
     key: 0,
   },
   {
@@ -42,6 +31,7 @@ const defaultCameras = [
     name: "Heart",
     target: [0, 0.82, 0],
     rotation: [0, 0, 0],
+    rotate: false,
     key: 1,
   },
   {
@@ -49,36 +39,129 @@ const defaultCameras = [
     name: "Head",
     target: [0, 1.05, 0],
     rotation: [0, 0, 0],
+    rotate: false,
     key: 2,
   },
 ];
+const backgroundColor = "#010101";
+
+const backgroundTexture = defaultBackground;
+const customBackgroundEnable = false;
+const maxCameraDistance = 4;
+const minCameraDistance = 0.3;
+const cameraTolerance = 0.1;
 
 const AvaCanvas = (props) => {
-  const [backgroundColor, setBackgroundColor] = useState(
-    "linear-gradient(#808EA5, #A1B0C6)"
-  );
-  const [backgroundTexture, setBackGroundTexture] = useState(defaultBackground);
-  const [customBackgroundEnable, setCustomBackgroundEnable] = useState(false);
   const [cameraPosition, setCameraPosition] = useState(defaultCamera);
   const [animation, setAnimation] = useState("");
-
+  const [cameraAngle, setCameraAngle] = useState(Math.PI / 2);
+  const [cameraZoom, setCameraZoom] = useState(1);
   const orbitControlsRef = useRef(null);
+  const [selectedCamera, setSelectedCamera] = useState("Default");
+  const [autoRotate, setAutoRotate] = useState(true);
 
-  function updateCamera() {
-    console.log(orbitControlsRef.current.object.position);
+  function updateAutoRotate(rotate) {
+    // console.log(rotate);
+    orbitControlsRef.current.autoRotate = rotate;
+    setAutoRotate(rotate);
     orbitControlsRef.current.update();
-
-    // Needs to update perspective Camera .updateProjectionMatrix ()
   }
 
   function updateAnimationList(list) {
     if (list[0]) {
       updateAnimation(list[0]);
-      console.log(list[0]);
     }
   }
 
+  function zoomIntoTarget(cameraName) {
+    var cameraToZoom = defaultCameras.filter(
+      (camera) => camera.name === cameraName
+    )[0];
+    var target = cameraToZoom.target;
+
+    updateAutoRotate(false); // Set autoRotate to false is zoom is close
+
+    const camera = orbitControlsRef.current;
+    const coords = {
+      x: camera.object.position.x,
+      y: camera.object.position.y,
+      z: camera.object.position.z,
+    };
+    var newCoords = calcNewCoords(coords, target, true);
+
+    if (calcPlaneDistance(newCoords) < minCameraDistance) {
+      return;
+    }
+    new TWEEN.Tween(coords)
+      .to({
+        x: newCoords.x,
+        y: newCoords.y,
+        z: newCoords.z,
+      })
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .onUpdate(() => camera.object.position.set(coords.x, coords.y, coords.z))
+      .start();
+  }
+
+  function calcNewCoords(oldCoords, targetCoords, zoomIn) {
+    var fullDistance = cubeRootCoords(oldCoords);
+    var newX = oldCoords.x;
+    var newY = oldCoords.y;
+    var newZ = oldCoords.z;
+    if (zoomIn) {
+      newX = oldCoords.x - (oldCoords.x - targetCoords[0]) / 3;
+      newY = oldCoords.y - (oldCoords.y - targetCoords[1]) / 3;
+      newZ = oldCoords.z - (oldCoords.z - targetCoords[2]) / 3;
+    } else {
+      newX = oldCoords.x + (oldCoords.x - targetCoords[0]) / 3;
+      newY = oldCoords.y + (oldCoords.y - targetCoords[1]) / 3;
+      newZ = oldCoords.z + (oldCoords.z - targetCoords[2]) / 3;
+    }
+
+    var newCoords = { x: newX, y: newY, z: newZ };
+
+    // var distanceToZoom = cubeRootCoords(newCoords);
+    // console.log(`Original Distance: ${fullDistance}`);
+    // console.log(`New Distance: ${distanceToZoom}`);
+
+    return newCoords;
+  }
+
+  function zoomAwayFromTarget(cameraName) {
+    var cameraToZoom = defaultCameras.filter(
+      (camera) => camera.name === cameraName
+    )[0];
+    var target = cameraToZoom.target;
+
+    updateAutoRotate(false); // Set autoRotate to false is zoom is close
+
+    const camera = orbitControlsRef.current;
+    const coords = {
+      x: camera.object.position.x,
+      y: camera.object.position.y,
+      z: camera.object.position.z,
+    };
+
+    var newCoords = calcNewCoords(coords, target, false);
+
+    if (calcPlaneDistance(newCoords) - cameraTolerance > maxCameraDistance) {
+      return;
+    }
+
+    new TWEEN.Tween(coords)
+      .to({
+        x: newCoords.x,
+        y: newCoords.y,
+        z: newCoords.z,
+      })
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .onUpdate(() => camera.object.position.set(coords.x, coords.y, coords.z))
+      .start();
+  }
+
   function updateCameraAnimation(cameraKey) {
+    setSelectedCamera(cameraKey.name);
+    updateAutoRotate(cameraKey.rotate);
     const camera = orbitControlsRef.current;
     const coords = {
       x: camera.object.position.x,
@@ -139,13 +222,31 @@ const AvaCanvas = (props) => {
     setAnimation(animationName);
     // setBackgroundColor("909FB6");
   }
+  function cubeRootCoords(position) {
+    var total =
+      Math.pow(position.x, 2) +
+      Math.pow(position.y + cameraPosition[1], 2) + //to center the calculation from the camera target
+      Math.pow(position.z, 2);
+    return Math.cbrt(total);
+  }
+
+  function calcPlaneDistance(position) {
+    var total = Math.pow(position.x, 2) + Math.pow(position.z, 2);
+    return Math.sqrt(total);
+  }
+
   function Dolly() {
     useFrame((state) => {
       // orbitControlsRef.current.target.y = orbitControlsRef.current.target.y + 0.001;
       orbitControlsRef.current.update();
       TWEEN.update();
       // state.camera.translateY(0.1);
-      // console.log(orbitControlsRef);
+      // console.log(orbitControlsRef.current);
+      setCameraAngle(orbitControlsRef.current.getPolarAngle());
+      setCameraZoom(
+        defaultCamera[2] /
+          cubeRootCoords(orbitControlsRef.current.object.position)
+      );
       // console.log(state.camera); //x: -0.01228111897555405, y: 0.9504616405180882, z: 0.3090214385522207;
       // console.log(state.clock.elapsedTime % 60);
     });
@@ -161,18 +262,18 @@ const AvaCanvas = (props) => {
     >
       <AvaInterface
         defaultCameras={defaultCameras}
-        defaultBackgrounds={defaultBackgrounds}
-        backgroundTexture={backgroundTexture}
-        setBackGround={setBackGroundTexture}
-        cameraPosition={cameraPosition}
-        updateCamera={updateCamera}
-        setCustomBackgroundEnable={setCustomBackgroundEnable}
-        setCameraPosition={setCameraPosition}
-        updateAnimation={updateAnimation}
-        animation={animation}
         updateCameraPosition={updateCameraAnimation}
+        setCameraPosition={setCameraPosition}
+        avaNumber={
+          props.match.params.item ? props.match.params.item : props.item
+        }
+        cameraAngle={cameraAngle}
+        cameraZoom={cameraZoom}
+        selectedCamera={selectedCamera}
+        zoomIn={zoomIntoTarget}
+        zoomOut={zoomAwayFromTarget}
       />
-      <Canvas id="canvas" shadows>
+      <Canvas id="canvas" shadows position={[0, -1, 0]}>
         <ambientLight intensity={1} />
         <directionalLight intensity={5} />
         <Suspense fallback={Loading}>
@@ -222,9 +323,10 @@ const AvaCanvas = (props) => {
           maxPolarAngle={angleToRadians(90)}
           target={[0, 0.8, 0]}
           enableZoom={true}
-          enablePan={false}
-          maxDistance={6}
-          minDistance={0.25}
+          enablePan={true}
+          maxDistance={maxCameraDistance}
+          minDistance={minCameraDistance}
+          autoRotate={autoRotate}
         />
         <Dolly />
       </Canvas>

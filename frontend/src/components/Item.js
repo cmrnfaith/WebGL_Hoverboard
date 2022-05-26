@@ -22,7 +22,7 @@ const Item = ({ animation, setAnimations, collection, name }) => {
   );
   const { actions, names } = useAnimations(animations, group);
   useEffect(() => {
-    console.log(actions);
+    // console.log(actions);
 
     if (actions[animation]) {
       for (const animation of names) {
@@ -35,7 +35,7 @@ const Item = ({ animation, setAnimations, collection, name }) => {
   useEffect(() => {
     setAnimations(names);
   }, []);
-  console.log(animations);
+  // console.log(animations);
   return (
     <group ref={group} dispose={null}>
       <primitive scale={scale[collection].scale} object={scene} />

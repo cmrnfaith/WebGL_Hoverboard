@@ -275,14 +275,166 @@ h2 {
 
 .interface-ava {
   position: absolute;
-  height: 100vh;
-  max-width: 100vw;
+  /* height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  overflow: hidden;
+  overflow: hidden; */
   top: 0;
   z-index: 1;
+}
+
+.interface-left {
+  position: absolute;
+  height: 100vh;
+  max-width: 64px;
+  width: 12.5vw;
+
+  left: 0px;
+  top: 0px;
+
+  /* Dark Gray */
+
+  box-sizing: border-box;
+  border-right: 1px solid #1d1e21;
+}
+
+.interface-right {
+  position: absolute;
+  height: 100vh;
+  max-width: 64px;
+  width: 12.5vw;
+
+  left: 77.5vw;
+  top: 0px;
+
+  /* Dark Gray */
+
+  box-sizing: border-box;
+  border-right: 1px solid #1d1e21;
+}
+
+.interface-ava-button-1 {
+  position: absolute;
+  max-width: 64px;
+  width: 12.5vw;
+  max-height: 64px;
+  height: 12.5vw;
+  top: 0;
+  left: 0;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: #1d1e21;
+}
+.interface-ava-button-2 {
+  position: absolute;
+  max-width: 64px;
+  width: 12.5vw;
+  max-height: 64px;
+  height: 12.5vw;
+  top: 64px;
+  left: 0;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: #1d1e21;
+}
+.interface-ava-button-3 {
+  position: absolute;
+  max-width: 64px;
+  width: 12.5vw;
+  max-height: 64px;
+  height: 12.5vw;
+  top: 128px;
+  left: 0;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: #1d1e21;
+}
+
+.interface-selected-button {
+  /* Dark Gray */
+  background: #1d1e21;
+  transition: 0.5s;
+}
+
+.interface-selected-camera {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(2%) saturate(624%)
+    hue-rotate(156deg) brightness(106%) contrast(95%);
+}
+.interface-ava-button-1:hover {
+  background: rgba(29, 30, 33, 0.5);
+  transition: 0.3s;
+}
+.interface-ava-button-2:hover {
+  background: rgba(29, 30, 33, 0.5);
+  transition: 0.3s;
+}
+.interface-ava-button-3:hover {
+  background: rgba(29, 30, 33, 0.5);
+  transition: 0.3s;
+}
+
+.interface-ava-button-1:hover .ava-icon {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(2%) saturate(624%)
+    hue-rotate(156deg) brightness(106%) contrast(95%);
+}
+
+.interface-ava-button-2:hover .ava-icon {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(2%) saturate(624%)
+    hue-rotate(156deg) brightness(106%) contrast(95%);
+  transition: 0.3s;
+}
+.interface-ava-button-3:hover .ava-icon {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(2%) saturate(624%)
+    hue-rotate(156deg) brightness(106%) contrast(95%);
+  transition: 0.3s;
+}
+
+.ava-icon {
+  position: absolute;
+  left: 31.25%;
+  right: 31.25%;
+  top: 31.25%;
+  bottom: 31.25%;
+}
+
+.ava-minus-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 468px;
+  top: 464.1px;
+}
+
+.ava-plus-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 436.5px;
+  top: 468px;
+}
+
+.ava-text {
+  /* 90º200% – 390 */
+
+  position: absolute;
+  width: 123px;
+  height: 17px;
+  left: 354px;
+  top: 24px;
+
+  font-family: "Noto Sans Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
+  letter-spacing: 0.015em;
+
+  /* Light Gray */
+
+  color: #9aa0ab;
 }
 
 .MuiButton-root {
