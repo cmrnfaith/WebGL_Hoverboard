@@ -12,7 +12,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 const collection = "Testing";
-const item = "animations";
+const item = "42";
 const App = () => {
   function withProps(Component, props) {
     return function (matchProps) {
@@ -25,7 +25,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          component={withProps(Canvas, { collection, item })}
+          component={withProps(AvaCanvas, { collection, item })}
         />
         <Route path="/staking/:collection/:item" component={StakingCanvas} />
 
