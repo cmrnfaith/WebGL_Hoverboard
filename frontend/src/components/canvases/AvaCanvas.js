@@ -54,6 +54,12 @@ const maxCameraDistance = 4;
 const minCameraDistance = 0.3;
 const cameraTolerance = 0.1;
 
+const {
+  calcPlaneDistance,
+  cubeRootCoords,
+  calcNewCoords,
+} = require("../../utils/canvasFunctions");
+
 const AvaCanvas = (props) => {
   const [cameraPosition, setCameraPosition] = useState(defaultCamera);
   const [animation, setAnimation] = useState("");
@@ -104,30 +110,6 @@ const AvaCanvas = (props) => {
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate(() => camera.object.position.set(coords.x, coords.y, coords.z))
       .start();
-  }
-
-  function calcNewCoords(oldCoords, targetCoords, zoomIn) {
-    // var fullDistance = cubeRootCoords(oldCoords);
-    var newX = oldCoords.x;
-    var newY = oldCoords.y;
-    var newZ = oldCoords.z;
-    if (zoomIn) {
-      newX = oldCoords.x - (oldCoords.x - targetCoords[0]) / 3;
-      newY = oldCoords.y - (oldCoords.y - targetCoords[1]) / 3;
-      newZ = oldCoords.z - (oldCoords.z - targetCoords[2]) / 3;
-    } else {
-      newX = oldCoords.x + (oldCoords.x - targetCoords[0]) / 3;
-      newY = oldCoords.y + (oldCoords.y - targetCoords[1]) / 3;
-      newZ = oldCoords.z + (oldCoords.z - targetCoords[2]) / 3;
-    }
-
-    var newCoords = { x: newX, y: newY, z: newZ };
-
-    // var distanceToZoom = cubeRootCoords(newCoords);
-    // console.log(`Original Distance: ${fullDistance}`);
-    // console.log(`New Distance: ${distanceToZoom}`);
-
-    return newCoords;
   }
 
   function zoomAwayFromTarget(cameraName) {
@@ -225,18 +207,6 @@ const AvaCanvas = (props) => {
     setAnimation(animationName);
     // setBackgroundColor("909FB6");
   }
-  function cubeRootCoords(position) {
-    var total =
-      Math.pow(position.x, 2) +
-      Math.pow(position.y + cameraPosition[1], 2) + //to center the calculation from the camera target
-      Math.pow(position.z, 2);
-    return Math.cbrt(total);
-  }
-
-  function calcPlaneDistance(position) {
-    var total = Math.pow(position.x, 2) + Math.pow(position.z, 2);
-    return Math.sqrt(total);
-  }
 
   function Dolly() {
     useFrame((state) => {
@@ -248,7 +218,10 @@ const AvaCanvas = (props) => {
       setCameraAngle(orbitControlsRef.current.getPolarAngle());
       setCameraZoom(
         defaultCamera[2] /
-          cubeRootCoords(orbitControlsRef.current.object.position)
+          cubeRootCoords(
+            orbitControlsRef.current.object.position,
+            cameraPosition
+          )
       );
       // console.log(state.camera); //x: -0.01228111897555405, y: 0.9504616405180882, z: 0.3090214385522207;
       // console.log(state.clock.elapsedTime % 60);
