@@ -25,6 +25,7 @@ const defaultCameras = [
     rotation: [0, 0, 0],
     rotate: true,
     key: 0,
+    next: 1,
   },
   {
     value: [-0.0123, 0.92, 0.3],
@@ -33,6 +34,7 @@ const defaultCameras = [
     rotation: [0, 0, 0],
     rotate: false,
     key: 1,
+    next: 2,
   },
   {
     value: [-0.0123, 1.08, 0.309],
@@ -41,6 +43,7 @@ const defaultCameras = [
     rotation: [0, 0, 0],
     rotate: false,
     key: 2,
+    next: 0,
   },
 ];
 const backgroundColor = "#010101";
@@ -264,14 +267,9 @@ const AvaCanvas = (props) => {
         defaultCameras={defaultCameras}
         updateCameraPosition={updateCameraAnimation}
         setCameraPosition={setCameraPosition}
-        avaNumber={
-          props.match.params.item ? props.match.params.item : props.item
-        }
         cameraAngle={cameraAngle}
         cameraZoom={cameraZoom}
         selectedCamera={selectedCamera}
-        zoomIn={zoomIntoTarget}
-        zoomOut={zoomAwayFromTarget}
       />
       <Canvas id="canvas" shadows position={[0, -1, 0]}>
         <ambientLight intensity={1} />

@@ -1,35 +1,32 @@
 import { ReactComponent as DiscDefault } from "../images/fi_disc.svg";
 import { ReactComponent as TargetDefault } from "../images/fi_target.svg";
 import { ReactComponent as HexagonDefault } from "../images/fi_hexagon.svg";
-import { ReactComponent as MinusDefault } from "../images/fi_minus.svg";
-import { ReactComponent as PlusDefault } from "../images/fi_plus.svg";
+// import { ReactComponent as MinusDefault } from "../images/fi_minus.svg";
+// import { ReactComponent as PlusDefault } from "../images/fi_plus.svg";
 import { ReactComponent as AvaDefault } from "../images/fi_ava.svg";
 import { radToDegrees } from "../utils/radToAngle";
+import { useState } from "react";
 
 const AvaInterface = ({
   defaultCameras,
   setCameraPosition,
   updateCameraPosition,
-  avaNumber,
   cameraAngle,
   cameraZoom,
   selectedCamera,
-  zoomIn,
-  zoomOut,
 }) => {
   // useEffect(() => {});
+  const [nextCameraState, setCameraState] = useState(1);
 
-  function handleCameraChange(new_camera) {
-    console.log(
-      defaultCameras.filter((camera) => camera.name === new_camera)[0]
-    );
-    setCameraPosition(
-      defaultCameras.filter((camera) => camera.name === new_camera)[0].value
-    );
+  function handleCameraChange() {
+    var newCamera = defaultCameras.filter(
+      (camera) => camera.key === nextCameraState
+    )[0];
+    console.log(newCamera);
+    setCameraPosition(newCamera.value);
 
-    updateCameraPosition(
-      defaultCameras.filter((camera) => camera.name === new_camera)[0]
-    );
+    updateCameraPosition(newCamera);
+    setCameraState(newCamera.next);
   }
 
   return (
@@ -42,23 +39,21 @@ const AvaInterface = ({
               : "interface-ava-button-1"
           }
           onClick={() => {
-            handleCameraChange("Head");
+            handleCameraChange();
           }}
         >
-          <DiscDefault
-            className={
-              selectedCamera === "Head"
-                ? "ava-icon interface-selected-camera"
-                : "ava-icon"
-            }
-            // style={{
-            //   filter:
-            //     "invert(94%) sepia(2%) saturate(624%) hue-rotate(156deg) brightness(106%) contrast(95%)",
-            // }}
-          />
+          {nextCameraState === 1 && (
+            <HexagonDefault className="ava-icon interface-selected-camera" />
+          )}
+          {nextCameraState === 2 && (
+            <TargetDefault className="ava-icon interface-selected-camera" />
+          )}
+          {nextCameraState === 0 && (
+            <DiscDefault className="ava-icon interface-selected-camera" />
+          )}
         </div>
 
-        <div
+        {/* <div
           className={
             selectedCamera === "Heart"
               ? "interface-ava-button-2 interface-selected-button"
@@ -75,9 +70,9 @@ const AvaInterface = ({
                 : "ava-icon"
             }
           />
-        </div>
+        </div> */}
 
-        <div
+        {/* <div
           className={
             selectedCamera === "Default"
               ? "interface-ava-button-3 interface-selected-button"
@@ -94,10 +89,10 @@ const AvaInterface = ({
                 : "ava-icon"
             }
           />
-        </div>
+        </div> */}
       </div>
       <div className="interface-right">
-        <div
+        {/* <div
           className="ava-plus-icon"
           onClick={() => {
             zoomIn(selectedCamera);
@@ -112,7 +107,7 @@ const AvaInterface = ({
           }}
         >
           <MinusDefault />
-        </div>
+        </div> */}
       </div>
       <div className="ava-text">
         {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}%

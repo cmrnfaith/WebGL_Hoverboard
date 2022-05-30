@@ -359,21 +359,22 @@ h2 {
     hue-rotate(156deg) brightness(106%) contrast(95%);
 }
 .interface-ava-button-1:hover {
-  background: rgba(29, 30, 33, 0.5);
+  background: #1d1e21;
   transition: 0.3s;
 }
 .interface-ava-button-2:hover {
-  background: rgba(29, 30, 33, 0.5);
+  background: #1d1e21;
   transition: 0.3s;
 }
 .interface-ava-button-3:hover {
-  background: rgba(29, 30, 33, 0.5);
+  background: #1d1e21;
   transition: 0.3s;
 }
 
 .interface-ava-button-1:hover .ava-icon {
   filter: brightness(0) saturate(100%) invert(94%) sepia(2%) saturate(624%)
     hue-rotate(156deg) brightness(106%) contrast(95%);
+  transition: 0.3s;
 }
 
 .interface-ava-button-2:hover .ava-icon {
