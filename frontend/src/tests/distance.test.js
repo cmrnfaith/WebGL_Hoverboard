@@ -13,7 +13,7 @@ test("Coordinate calculations base case is correct.", () => {
 test("Coordinate calculations 3 coords correct distance with camera target.", () => {
   var position = { x: 7, y: 4, z: 3 };
   var cameraTarget = [17, 6, 2];
-  expect(cubeRootCoords(position, cameraTarget)).toBeCloseTo(10.246951, 2);
+  expect(cubeRootCoords(position, cameraTarget)).toBeCloseTo(12.569, 2);
 });
 
 test("Coordinate calculations edge case of zero distance.", () => {
