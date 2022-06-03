@@ -14,32 +14,32 @@ import AvaInterface from "../AvaInterface";
 import Item from "../Item";
 import * as TWEEN from "@tweenjs/tween.js";
 
-const defaultCamera = [-0.35, 1.4, 2.2];
+const defaultCamera = [-0.35, 2.4, 2.2];
 const defaultBackground = "dawn";
 
 const defaultCameras = [
   {
-    value: [-0.35, 1.4, 2.2],
+    value: [-0.35, 2.4, 2.2],
     name: "Default",
-    target: [0, 0.8, 0],
+    target: [0, 1.8, 0],
     rotation: [0, 0, 0],
     rotate: true,
     key: 0,
     next: 1,
   },
   {
-    value: [-0.0123, 0.92, 0.3],
+    value: [-0.0123, 1.92, 0.3],
     name: "Heart",
-    target: [0, 0.82, 0],
+    target: [0, 1.82, 0],
     rotation: [0, 0, 0],
     rotate: false,
     key: 1,
     next: 2,
   },
   {
-    value: [-0.0123, 1.08, 0.309],
+    value: [-0.0123, 2.08, 0.309],
     name: "Head",
-    target: [0, 1.05, 0],
+    target: [0, 2.05, 0],
     rotation: [0, 0, 0],
     rotate: false,
     key: 2,
@@ -217,11 +217,12 @@ const AvaCanvas = (props) => {
       // console.log(orbitControlsRef.current);
       setCameraAngle(orbitControlsRef.current.getPolarAngle());
       setCameraZoom(
-        defaultCamera[2] /
+        (defaultCamera[2] /
           cubeRootCoords(
             orbitControlsRef.current.object.position,
             cameraPosition
-          )
+          )) *
+          2
       );
       // console.log(state.camera); //x: -0.01228111897555405, y: 0.9504616405180882, z: 0.3090214385522207;
       // console.log(state.clock.elapsedTime % 60);
@@ -245,7 +246,7 @@ const AvaCanvas = (props) => {
         cameraZoom={cameraZoom}
         selectedCamera={selectedCamera}
       />
-      <Canvas id="canvas" shadows position={[0, -1, 0]}>
+      <Canvas id="canvas" shadows position={[0, 0, 0]}>
         <ambientLight intensity={1} />
         <directionalLight intensity={5} />
         <Suspense fallback={null}>
@@ -266,7 +267,7 @@ const AvaCanvas = (props) => {
             ></Environment>
           )}
           <Float
-            position={[0, 0, 0]}
+            position={[0, 1, 0]}
             rotation={[0, 0, 0]}
             rotationIntensity={0}
             floatIntensity={0}
@@ -293,7 +294,7 @@ const AvaCanvas = (props) => {
           ref={orbitControlsRef}
           minPolarAngle={angleToRadians(20)}
           maxPolarAngle={angleToRadians(90)}
-          target={[0, 0.8, 0]}
+          target={[0, 1.8, 0]}
           enableZoom={true}
           enablePan={true}
           maxDistance={maxCameraDistance}

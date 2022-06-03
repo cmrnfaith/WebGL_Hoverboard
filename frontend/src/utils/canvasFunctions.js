@@ -22,7 +22,7 @@ function calcNewCoords(oldCoords, targetCoords, zoomIn, factor = 3) {
   return newCoords;
 }
 
-function cubeRootCoords(position, cameraPosition = 0.8) {
+function cubeRootCoords(position, cameraPosition = 1.8) {
   var total =
     Math.pow(position.x, 2) +
     Math.pow(position.y + cameraPosition[1], 2) + //to center the calculation from the camera target
