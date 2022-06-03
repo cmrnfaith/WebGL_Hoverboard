@@ -1,0 +1,20 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" fill="#2E2E2E"/>
+<rect width="512" height="512" transform="translate(-20 -20)" fill="black"/>
+<mask id="path-1-inside-1_1934_2514" fill="white">
+<path d="M-20 -20H44V492H-20V-20Z"/>
+</mask>
+<path d="M43 -20V492H45V-20H43Z" fill="#1D1E21" mask="url(#path-1-inside-1_1934_2514)"/>
+<mask id="path-3-inside-2_1934_2514" fill="white">
+<path d="M-20 -20H44V44H-20V-20Z"/>
+</mask>
+<path d="M44 44V45H45V44H44ZM43 -20V44H45V-20H43ZM44 43H-20V45H44V43Z" fill="#1D1E21" mask="url(#path-3-inside-2_1934_2514)"/>
+<circle cx="12" cy="12" r="10.5" stroke="url(#paint0_linear_1934_2514)"/>
+<defs>
+<linearGradient id="paint0_linear_1934_2514" x1="1" y1="10.7856" x2="23" y2="10.7856" gradientUnits="userSpaceOnUse">
+<stop/>
+<stop offset="0.495894" stop-color="#1D1E21"/>
+<stop offset="1" stop-color="#9AA0AB"/>
+</linearGradient>
+</defs>
+</svg>

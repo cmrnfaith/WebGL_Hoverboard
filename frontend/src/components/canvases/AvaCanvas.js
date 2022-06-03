@@ -236,6 +236,7 @@ const AvaCanvas = (props) => {
         background: backgroundColor,
       }}
     >
+      {/* <Loading /> */}
       <AvaInterface
         defaultCameras={defaultCameras}
         updateCameraPosition={updateCameraAnimation}
@@ -247,7 +248,7 @@ const AvaCanvas = (props) => {
       <Canvas id="canvas" shadows position={[0, -1, 0]}>
         <ambientLight intensity={1} />
         <directionalLight intensity={5} />
-        <Suspense fallback={Loading}>
+        <Suspense fallback={null}>
           <PerspectiveCamera
             makeDefault
             position={cameraPosition}

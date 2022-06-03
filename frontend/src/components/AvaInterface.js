@@ -1,11 +1,15 @@
 import { ReactComponent as DiscDefault } from "../images/fi_disc.svg";
 import { ReactComponent as TargetDefault } from "../images/fi_target.svg";
 import { ReactComponent as HexagonDefault } from "../images/fi_hexagon.svg";
+import { ReactComponent as EllipseDefault } from "../images/fi_ellipse.svg";
+
+import Ellipse from "../images/ellipse.png";
 // import { ReactComponent as MinusDefault } from "../images/fi_minus.svg";
 // import { ReactComponent as PlusDefault } from "../images/fi_plus.svg";
 import { ReactComponent as AvaDefault } from "../images/fi_ava.svg";
 import { radToDegrees } from "../utils/radToAngle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useProgress } from "@react-three/drei";
 
 const AvaInterface = ({
   defaultCameras,
@@ -14,9 +18,16 @@ const AvaInterface = ({
   cameraAngle,
   cameraZoom,
   selectedCamera,
+  initialState = (active) => active,
 }) => {
-  // useEffect(() => {});
+  const { active, progress } = useProgress();
   const [nextCameraState, setCameraState] = useState(1);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    let t;
+    if (active !== loading) t = setTimeout(() => setLoading(active), 100);
+    return () => clearTimeout(t);
+  }, [loading, active]);
 
   function handleCameraChange() {
     var newCamera = defaultCameras.filter(
@@ -32,86 +43,40 @@ const AvaInterface = ({
   return (
     <div className="interface-ava">
       <div className="interface-left">
-        <div
-          className={
-            selectedCamera === "Head"
-              ? "interface-ava-button-1 interface-selected-button"
-              : "interface-ava-button-1"
-          }
-          onClick={() => {
-            handleCameraChange();
-          }}
-        >
-          {nextCameraState === 1 && (
-            <HexagonDefault className="ava-icon interface-selected-camera" />
-          )}
-          {nextCameraState === 2 && (
-            <TargetDefault className="ava-icon interface-selected-camera" />
-          )}
-          {nextCameraState === 0 && (
-            <DiscDefault className="ava-icon interface-selected-camera" />
-          )}
-        </div>
-
-        {/* <div
-          className={
-            selectedCamera === "Heart"
-              ? "interface-ava-button-2 interface-selected-button"
-              : "interface-ava-button-2"
-          }
-          onClick={() => {
-            handleCameraChange("Heart");
-          }}
-        >
-          <TargetDefault
+        {loading ? (
+          <div className="interface-ava-button-1">
+            <img src={Ellipse} className="ava-ellipse ava-icon" />
+          </div>
+        ) : (
+          <div
             className={
-              selectedCamera === "Heart"
-                ? "ava-icon interface-selected-camera"
-                : "ava-icon"
+              selectedCamera === "Head"
+                ? "interface-ava-button-1 interface-selected-button"
+                : "interface-ava-button-1"
             }
-          />
-        </div> */}
-
-        {/* <div
-          className={
-            selectedCamera === "Default"
-              ? "interface-ava-button-3 interface-selected-button"
-              : "interface-ava-button-3"
-          }
-          onClick={() => {
-            handleCameraChange("Default");
-          }}
-        >
-          <HexagonDefault
-            className={
-              selectedCamera === "Default"
-                ? "ava-icon interface-selected-camera"
-                : "ava-icon"
-            }
-          />
-        </div> */}
+            onClick={() => {
+              handleCameraChange();
+            }}
+          >
+            {nextCameraState === 1 && (
+              <HexagonDefault className="ava-icon interface-selected-camera" />
+            )}
+            {nextCameraState === 2 && (
+              <TargetDefault className="ava-icon interface-selected-camera" />
+            )}
+            {nextCameraState === 0 && (
+              <DiscDefault className="ava-icon interface-selected-camera" />
+            )}
+          </div>
+        )}
       </div>
-      <div className="interface-right">
-        {/* <div
-          className="ava-plus-icon"
-          onClick={() => {
-            zoomIn(selectedCamera);
-          }}
-        >
-          <PlusDefault />
+      <div className="interface-right"></div>
+      {loading === false && (
+        <div className="ava-text">
+          {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}
+          %
         </div>
-        <div
-          className="ava-minus-icon"
-          onClick={() => {
-            zoomOut(selectedCamera);
-          }}
-        >
-          <MinusDefault />
-        </div> */}
-      </div>
-      <div className="ava-text">
-        {radToDegrees(cameraAngle).toFixed(0)}°{(cameraZoom * 100).toFixed(0)}%
-      </div>
+      )}
 
       <div className="ava-text-logo">
         <AvaDefault />
