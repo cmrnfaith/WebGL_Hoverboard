@@ -25,7 +25,11 @@ const AvaInterface = ({
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     let t;
-    if (active !== loading) t = setTimeout(() => setLoading(active), 100);
+    if (active !== loading && loading) {
+      console.log(active);
+      t = setTimeout(() => setLoading(active), 300);
+    }
+
     return () => clearTimeout(t);
   }, [loading, active]);
 
