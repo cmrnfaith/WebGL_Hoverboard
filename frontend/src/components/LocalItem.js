@@ -132,7 +132,9 @@ const LocalItem = ({ animation, setAnimations, selectedFile, setContent }) => {
     // actions
   }, [animation]);
   useEffect(() => {
-    setAnimations(names);
+    if (names.length > 0) {
+      setAnimations(names);
+    }
   }, []);
 
   return (
