@@ -9,6 +9,7 @@ import {
 } from "@react-three/drei";
 import PreviewInterface from "../PreviewInterface";
 import { SkeletonHelper } from "three";
+import * as TWEEN from "@tweenjs/tween.js";
 
 import Loading from "../Loading";
 import LocalItem from "../LocalItem";
@@ -17,6 +18,7 @@ const defaultLightPosition = [0.6, 6.8, 3];
 const defaultAnimations = ["", "Idle", "T-Pose"];
 
 const UploadCanvas = (props) => {
+  const [cameraYTarget, setCameraYTarget] = useState(0.1);
   const [lightPosition, setLightPosition] = useState(defaultLightPosition);
   const [directionalLightIntensity, setDirectionalLightIntensity] = useState(5);
   const [ambientLightIntensity, setAmbientLightIntensity] = useState(0.5);
@@ -34,9 +36,12 @@ const UploadCanvas = (props) => {
   const [skeleton, setSkeleton] = useState(false);
   const [content, setContent] = useState(null);
   const [updateState, setUpdateState] = useState(true);
+  const orbitControlsRef = useRef(null);
 
   function Dolly() {
     useFrame((state) => {
+      orbitControlsRef.current.update();
+      TWEEN.update();
       state.scene.children.forEach((child) => {
         if (child.type === "DirectionalLight") {
           child.position.x = lightPosition[0];
@@ -67,6 +72,26 @@ const UploadCanvas = (props) => {
   function updateSkeleton(value) {
     setSkeleton(value);
     setUpdateState(true);
+  }
+
+  function handleCameraTarget(value) {
+    setCameraYTarget(value);
+    const camera = orbitControlsRef.current;
+    const target = {
+      x: camera.target.x,
+      y: camera.target.y,
+      z: camera.target.z,
+    };
+
+    new TWEEN.Tween(target)
+      .to({
+        x: 0,
+        y: value,
+        z: 0,
+      })
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(() => camera.target.set(target.x, target.y, target.z))
+      .start();
   }
 
   function updateAnimationList(list) {
@@ -114,11 +139,11 @@ const UploadCanvas = (props) => {
         animation={animation}
         setSkeleton={updateSkeleton}
         skeleton={skeleton}
+        cameraYTarget={cameraYTarget}
+        setCameraYTarget={handleCameraTarget}
+        filename={props.selectedFile}
       />
       <Canvas id="canvas" shadows>
-        <OrbitControls autoRotate={false}>
-          <mesh position={[0, 1, 0]}></mesh>
-        </OrbitControls>
         <ambientLight intensity={ambientLightIntensity} />
         <directionalLight
           intensity={directionalLightIntensity}
@@ -154,9 +179,10 @@ const UploadCanvas = (props) => {
           />
         </Suspense>
         <OrbitControls
+          ref={orbitControlsRef}
           minPolarAngle={angleToRadians(0)}
           maxPolarAngle={angleToRadians(90)}
-          target={[0, 0.7, 0]}
+          target={[0, 0.1, 0]}
           enableZoom={true}
           enablePan={false}
           maxDistance={6}
