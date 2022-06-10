@@ -185,8 +185,6 @@ const UploadCanvas = (props) => {
           target={[0, 0.1, 0]}
           enableZoom={true}
           enablePan={false}
-          maxDistance={6}
-          minDistance={1.5}
         />
         <Dolly />
       </Canvas>

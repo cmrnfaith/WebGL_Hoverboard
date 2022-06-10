@@ -506,6 +506,24 @@ h2 {
   background: #5a5a5b !important;
   cursor: pointer;
 }
+.interface-reset-button {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  top: 110px;
+  right: 10px;
+  color: white;
+  margin-right: 0;
+  padding: 10px;
+  background: #3a3a3b !important;
+  font-family: "Noto Sans Mono";
+  font-size: 0.8rem !important;
+}
+
+.interface-reset-button:hover {
+  background: #5a5a5b !important;
+  cursor: pointer;
+}
 
 .interface-filename {
   position: absolute;

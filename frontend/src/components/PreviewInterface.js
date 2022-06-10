@@ -12,6 +12,7 @@ import {
 
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+const defaultLightPosition = [0.6, 6.8, 3];
 
 const PreviewInterface = ({
   setBackgroundColor,
@@ -107,6 +108,13 @@ const PreviewInterface = ({
   function handleShadowFarChange(e) {
     // console.log(e.target.value);
     setShadowFar(e.target.value);
+  }
+  function resetLighting() {
+    console.log("reset lighting");
+    setLightPosition(defaultLightPosition);
+    setLightX(defaultLightPosition[0]);
+    setLightY(defaultLightPosition[1]);
+    setLightZ(defaultLightPosition[2]);
   }
 
   function handleCameraTargetChange(e) {
@@ -329,6 +337,13 @@ const PreviewInterface = ({
           <div className="interface-select" onClick={refreshPage}>
             <div className="interface-upload-button" onClick={refreshPage}>
               UPLOAD NEW GLB
+            </div>
+          </div>
+        </div>
+        <div className="interface-item">
+          <div className="interface-select" onClick={resetLighting}>
+            <div className="interface-reset-button" onClick={resetLighting}>
+              RESET LIGHTING
             </div>
           </div>
         </div>
