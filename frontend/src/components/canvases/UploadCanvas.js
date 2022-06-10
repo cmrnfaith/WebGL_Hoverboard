@@ -40,7 +40,8 @@ const UploadCanvas = (props) => {
 
   function Dolly() {
     useFrame((state) => {
-      orbitControlsRef.current.update();
+      // console.log(orbitControlsRef.current);
+      // orbitControlsRef.current.update();
       TWEEN.update();
       state.scene.children.forEach((child) => {
         if (child.type === "DirectionalLight") {

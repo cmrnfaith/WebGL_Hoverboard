@@ -110,11 +110,19 @@ const PreviewInterface = ({
     setShadowFar(e.target.value);
   }
   function resetLighting() {
-    console.log("reset lighting");
-    setLightPosition(defaultLightPosition);
-    setLightX(defaultLightPosition[0]);
-    setLightY(defaultLightPosition[1]);
-    setLightZ(defaultLightPosition[2]);
+    let newPosition = defaultLightPosition;
+    setDirectionalLightIntensity(5);
+    setAmbientLightIntensity(0.5);
+    var e = { target: { value: newPosition[0] } };
+    handleXChange(e);
+    e = { target: { value: newPosition[1] } };
+    handleYChange(e);
+    e = { target: { value: newPosition[2] } };
+    handleZChange(e);
+
+    // setLightY(newPosition[1]);
+    // setLightZ(newPosition[2]);
+    // setLightPosition(newPosition);
   }
 
   function handleCameraTargetChange(e) {
@@ -340,12 +348,9 @@ const PreviewInterface = ({
             </div>
           </div>
         </div>
-        <div className="interface-item">
-          <div className="interface-select" onClick={resetLighting}>
-            <div className="interface-reset-button" onClick={resetLighting}>
-              RESET LIGHTING
-            </div>
-          </div>
+
+        <div className="interface-reset-button" onClick={resetLighting}>
+          RESET LIGHTING
         </div>
       </div>
     </>
