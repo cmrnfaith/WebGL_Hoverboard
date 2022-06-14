@@ -341,14 +341,12 @@ const PreviewInterface = ({
         <div className="interface-item-wide">
           <div className="interface-select interface-filename">{filename}</div>
         </div>
-        <div className="interface-item">
-          <div className="interface-select" onClick={refreshPage}>
-            <div className="interface-upload-button" onClick={refreshPage}>
-              UPLOAD NEW GLB
-            </div>
+
+        <div className="interface-item-wide">
+          <div className="interface-upload-button" onClick={refreshPage}>
+            UPLOAD NEW GLB
           </div>
         </div>
-
         <div className="interface-reset-button" onClick={resetLighting}>
           RESET LIGHTING
         </div>

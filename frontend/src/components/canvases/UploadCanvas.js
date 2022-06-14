@@ -20,7 +20,8 @@ const defaultAnimations = ["", "Idle", "T-Pose"];
 const UploadCanvas = (props) => {
   const [cameraYTarget, setCameraYTarget] = useState(0.1);
   const [lightPosition, setLightPosition] = useState(defaultLightPosition);
-  const [directionalLightIntensity, setDirectionalLightIntensity] = useState(5);
+  const [directionalLightIntensity, setDirectionalLightIntensity] =
+    useState(2.5);
   const [ambientLightIntensity, setAmbientLightIntensity] = useState(0.5);
   const [backgroundColorOne, setBackgroundColorOne] = useState("#e66465");
   const [backgroundColorTwo, setBackgroundColorTwo] = useState("#9198e5");

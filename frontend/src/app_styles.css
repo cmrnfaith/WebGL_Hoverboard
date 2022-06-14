@@ -510,7 +510,7 @@ h2 {
   position: absolute;
   border: 1px solid black;
   border-radius: 5px;
-  top: 110px;
+  top: 115px;
   right: 10px;
   color: white;
   margin-right: 0;
@@ -536,10 +536,10 @@ h2 {
 }
 
 .interface-item-wide {
-  background: #333335;
+  background: no;
   color: white;
-  min-width: 5vw;
-  max-width: 12rem;
+  min-width: 7vw;
+  max-width: 15rem;
   text-color: white;
   border-radius: 5px;
   align-items: center;
